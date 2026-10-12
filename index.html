@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Dropdown Navbar</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e1b4b, #312e81);
+        color: white;
+      }
+
+      nav {
+        width: 100%;
+        min-height: 80px;
+        padding: 0 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(15, 23, 42, 0.85);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: #a78bfa;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      ul li {
+        position: relative;
+      }
+
+      ul li a,
+      .dropdown-title {
+        display: block;
+        padding: 12px 17px;
+        color: #e2e8f0;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      ul li a:hover,
+      .dropdown-title:hover {
+        color: white;
+        background: rgba(139, 92, 246, 0.2);
+      }
+
+      .active {
+        color: white;
+        background: linear-gradient(135deg, #7c3aed, #6366f1);
+      }
+
+      /* Dropdown menu */
+      .dropdown {
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 0;
+        min-width: 190px;
+        padding: 8px;
+        display: block;
+        background: #1e293b;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: 0.25s ease;
+        z-index: 10;
+      }
+
+      .dropdown li a {
+        padding: 12px 14px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+
+      .dropdown li a:hover {
+        background: linear-gradient(90deg, #7c3aed, #4f46e5);
+      }
+
+      .has-dropdown:hover .dropdown,
+      .has-dropdown:focus-within .dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .arrow {
+        display: inline-block;
+        margin-left: 5px;
+        font-size: 11px;
+        transition: transform 0.25s;
+      }
+
+      .has-dropdown:hover .arrow,
+      .has-dropdown:focus-within .arrow {
+        transform: rotate(180deg);
+      }
+
+      .hero {
+        min-height: calc(100vh - 80px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 6vw, 68px);
+        line-height: 1.15;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 span {
+        color: #a78bfa;
+      }
+
+      .hero p {
+        max-width: 600px;
+        color: #cbd5e1;
+        font-size: 17px;
+        line-height: 1.8;
+      }
+
+      .hero button {
+        margin-top: 30px;
+        padding: 14px 28px;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #7c3aed, #6366f1);
+        transition: 0.3s ease;
+      }
+
+      .hero button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+      }
+
+      @media (max-width: 650px) {
+        nav {
+          padding: 15px 4%;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        ul {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2px;
+        }
+
+        ul li a,
+        .dropdown-title {
+          padding: 10px 9px;
+          font-size: 13px;
+        }
+
+        .dropdown {
+          left: 50%;
+          transform: translate(-50%, 10px);
+        }
+
+        .has-dropdown:hover .dropdown,
+        .has-dropdown:focus-within .dropdown {
+          transform: translate(-50%, 0);
+        }
+
+        .hero {
+          min-height: calc(100vh - 120px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <h1 class="logo">My<span>Space</span></h1>
+
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+
+        <li class="has-dropdown">
+          <a href="#skills" class="dropdown-title">
+            Skills <span class="arrow">▼</span>
+          </a>
+
+          <ul class="dropdown">
+            <li><a href="#html">HTML & CSS</a></li>
+            <li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#react">React.js</a></li>
+            <li><a href="#node">Node.js</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero" id="about">
+      <h1>Design. Build. <span>Create.</span></h1>
+
+      <p>
+        Exploring modern web development with clean UI, creative designs and
+        interactive experiences.
+      </p>
+
+      <button
+        onclick="
+          document
+            .querySelector('#projects')
+            .scrollIntoView({ behavior: 'smooth' })
+        "
+      >
+        Explore Projects →
+      </button>
+    </section>
+
+    <section id="skills"></section>
+    <section id="html"></section>
+    <section id="javascript"></section>
+    <section id="react"></section>
+    <section id="node"></section>
+    <section id="projects"></section>
+    <section id="contact"></section>
+  </body>
+</html>
